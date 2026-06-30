@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bengal's Finest | B2B Handloom Sarees</title>
+    <!-- Google Fonts for Premium Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-surface: #141414;
+            --gold: #D4AF37;
+            --gold-dim: #a68827;
+            --crimson: #631010;
+            --text-main: #f5f5f5;
+            --text-muted: #a0a0a0;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links button:hover, .nav-links button.active {
+            color: var(--gold);
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border: 1px solid var(--gold);
+            background: transparent;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .btn:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+        }
+
+        .btn-solid {
+            background: var(--crimson);
+            border-color: var(--crimson);
+            color: white;
+        }
+
+        .btn-solid:hover {
+            background: transparent;
+            border-color: var(--crimson);
+            color: var(--crimson);
+        }
+
+        /* --- #hp MAIN VIEW --- */
+        #hp, #cv {
+            display: none;
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        #hp.active, #cv.active {
+            display: block;
+        }
+
+        /* 1. Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.9)), 
+                        url('https://images.unsplash.com/photo-1610030469983-98e550d615ef?auto=format&fit=crop&q=80&w=2000') center/cover;
+            padding: 0 5%;
+            margin-top: 60px; /* Offset for nav */
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* 2. Trust Marquee */
+        .marquee-wrap {
+            background: var(--gold);
+            color: var(--bg-dark);
+            padding: 0.8rem 0;
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: scrollMarquee 25s linear infinite;
+            font-weight: 500;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .marquee-content span {
+            margin: 0 3rem;
+        }
+
+        /* 3 & 4. Editorial & Vault Matrix */
+        .section-pad {
+            padding: 6rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .vault-sec .matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .vault-card {
+            background: var(--bg-surface);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 2.5rem;
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+
+        .vault-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold-dim);
+        }
+
+        .vault-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .vault-card ul {
+            list-style: none;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .vault-card ul li {
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* --- #cv SHOWROOM CATALOG --- */
+        .cat-wrap {
+            padding: 8rem 5% 5rem;
+        }
+        
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: filter 0.4s ease;
+        }
+
+        .product-card:hover img {
+            filter: grayscale(0%);
+        }
+
+        .product-info {
+            padding: 1.5rem 0;
+        }
+
+        .product-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-sheet {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* Animations */
+        @keyframes scrollMarquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Scrolls half to create seamless loop with duplicated text */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Bengal's Finest</div>
+        <div class="nav-links">
+            <button id="nav-hp" class="active" onclick="switchView('hp')">Home</button>
+            <button id="nav-cv" onclick="switchView('cv')">B2B Catalog</button>
+        </div>
+    </nav>
+
+    <!-- ================= HOMEPAGE VIEW ================= -->
+    <main id="hp" class="active">
+        
+        <!-- 1. Hero Section -->
+        <section class="hero">
+            <h1>Bengal's Finest <br>Handloom Sarees</h1>
+            <p>Direct B2B Sourcing • GI-Tagged Authenticity • Zero Margin Loss</p>
+            <div class="hero-ctas">
+                <button class="btn" onclick="switchView('cv')">Explore Collection</button>
+                <button class="btn btn-solid">Wholesale Partner Desk</button>
+            </div>
+        </section>
+
+        <!-- 2. Trust Marquee -->
+        <div class="marquee-wrap">
+            <div class="marquee-content">
+                <span>✦ ISO 9001:2015 Certified</span>
+                <span>✦ 100% GI-Tagged Bengali Handloom</span>
+                <span>✦ Zero-Defect Quality Control</span>
+                <span>✦ Global Export to 42 Markets</span>
+                <span>✦ OEM & Custom Branding Available</span>
+                <!-- Duplicate for seamless scroll -->
+                <span>✦ ISO 9001:2015 Certified</span>
+                <span>✦ 100% GI-Tagged Bengali Handloom</span>
+                <span>✦ Zero-Defect Quality Control</span>
+                <span>✦ Global Export to 42 Markets</span>
+                <span>✦ OEM & Custom Branding Available</span>
+            </div>
+        </div>
+
+        <!-- 3. Editorial Block 1 & 4. B2B Vault Matrix -->
+        <section class="vault-sec section-pad">
+            <div class="section-header">
+                <h2>The B2B Vault Matrix</h2>
+                <p style="color: var(--text-muted)">Wholesale inventory ledger for high-volume boutique partners.</p>
+            </div>
+            
+            <div class="matrix-grid">
+                <!-- Vault Card 1 -->
+                <div class="vault-card">
+                    <h3>Garad Heritage Prime</h3>
+                    <ul>
+                        <li><strong>Purity:</strong> 100% Undyed Mulberry Silk</li>
+                        <li><strong>Weave:</strong> Traditional Paper-crisp Finish</li>
+                        <li><strong>MOQ:</strong> 25 Units per Colorway</li>
+                        <li><strong>Lead Time:</strong> 14-21 Days</li>
+                    </ul>
+                    <button class="btn" style="width: 100%">Request Specs</button>
+                </div>
+
+                <!-- Vault Card 2 -->
+                <div class="vault-card" style="border-top: 3px solid var(--crimson);">
+                    <h3>Korial Zari Elegance</h3>
+                    <ul>
+                        <li><strong>Purity:</strong> Pure Silk with Electro-plated Zari</li>
+                        <li><strong>Weave:</strong> Dense Thread Count (120x120)</li>
+                        <li><strong>MOQ:</strong> 15 Units</li>
+                        <li><strong>Lead Time:</strong> 30 Days</li>
+                    </ul>
+                    <button class="btn" style="width: 100%">Request Specs</button>
+                </div>
+
+                <!-- Vault Card 3 -->
+                <div class="vault-card">
+                    <h3>Baluchari Narrative Vault</h3>
+                    <ul>
+                        <li><strong>Purity:</strong> Murshidabad Silk Base</li>
+                        <li><strong>Weave:</strong> Mythological Jacquard Motifs</li>
+                        <li><strong>MOQ:</strong> 10 Units</li>
+                        <li><strong>Lead Time:</strong> 45 Days</li>
+                    </ul>
+                    <button class="btn" style="width: 100%">Request Specs</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Placeholder Sections for further expansion -->
+        <!-- 5. Editorial Block 2 (Direct Sourcing) -->
+        <!-- 6. Animated Stats Counter (.stats-sec) -->
+        <!-- 7. Advantage Grid (.why-sec) -->
+        <!-- 8. Artisanal Heritage (.heritage-sec) -->
+        <!-- 9. Process Steps (.process-sec) -->
+        <!-- 10. Technical Metrics (.tech-sec) -->
+        <!-- 11. Global Export Grid (.export-sec) -->
+        <!-- 12. Testimonials (.testi-sec) -->
+        
+        <!-- 13. Wholesale Enquiry CTA -->
+        <section class="enquiry-sec section-pad" style="background: var(--bg-surface); text-align: center;">
+            <h2>Partner With The Source</h2>
+            <p style="margin: 1.5rem 0; color: var(--text-muted);">Access exclusive wholesale pricing and custom OEM loom allocations.</p>
+            <button class="btn btn-solid">Access Allocation Desk</button>
+        </section>
+
+    </main>
+
+    <!-- ================= SHOWROOM CATALOG VIEW ================= -->
+    <main id="cv">
+        <section class="cat-wrap">
+            <div class="section-header">
+                <h2>Studio Photography Ledger</h2>
+                <p style="color: var(--text-muted)">Unfiltered, high-resolution specifications for B2B buyers.</p>
+            </div>
+
+            <div class="cat-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <!-- Using placeholder images for demonstration -->
+                    <img src="https://images.unsplash.com/photo-1583391733958-d25e07fac661?auto=format&fit=crop&q=80&w=800" alt="Garad Saree">
+                    <div class="product-info">
+                        <h3>Garad Classic Standard</h3>
+                        <p style="color: var(--gold); font-family: var(--font-serif)">SKU: GCS-001</p>
+                        <div class="spec-sheet">
+                            <span><strong>Weight:</strong> 450g</span>
+                            <span><strong>Zari:</strong> None</span>
+                            <span><strong>Dye:</strong> Azo-Free</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1610113197368-7c858c40b8ea?auto=format&fit=crop&q=80&w=800" alt="Korial Saree">
+                    <div class="product-info">
+                        <h3>Korial Imperial Luxury</h3>
+                        <p style="color: var(--gold); font-family: var(--font-serif)">SKU: KIL-042</p>
+                        <div class="spec-sheet">
+                            <span><strong>Weight:</strong> 520g</span>
+                            <span><strong>Zari:</strong> Half-Fine Gold</span>
+                            <span><strong>Dye:</strong> Organic</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1610113197576-9d628f8f9eb9?auto=format&fit=crop&q=80&w=800" alt="Baluchari Saree">
+                    <div class="product-info">
+                        <h3>Baluchari Epic Thread</h3>
+                        <p style="color: var(--gold); font-family: var(--font-serif)">SKU: BAL-993</p>
+                        <div class="spec-sheet">
+                            <span><strong>Weight:</strong> 600g</span>
+                            <span><strong>Zari:</strong> Resham/Silver</span>
+                            <span><strong>Dye:</strong> Double-Boiled</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- --- JAVASCRIPT LOGIC --- -->
+    <script>
+        /**
+         * Toggles the UI between Homepage and Catalog Views
+         * @param {string} viewId - Accepts 'hp' or 'cv'
+         */
+        function switchView(viewId) {
+            // Get DOM elements
+            const hpView = document.getElementById('hp');
+            const cvView = document.getElementById('cv');
+            const navHp = document.getElementById('nav-hp');
+            const navCv = document.getElementById('nav-cv');
+
+            // Reset active states
+            hpView.classList.remove('active');
+            cvView.classList.remove('active');
+            navHp.classList.remove('active');
+            navCv.classList.remove('active');
+
+            // Apply new active states
+            if(viewId === 'hp') {
+                hpView.classList.add('active');
+                navHp.classList.add('active');
+            } else if (viewId === 'cv') {
+                cvView.classList.add('active');
+                navCv.classList.add('active');
+            }
+            
+            // Scroll smoothly to top on view change
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
